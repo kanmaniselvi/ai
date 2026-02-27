@@ -4,30 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Travel Planner</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #4cae4c;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
     <header>
-        <h1>Welcome to the Smart Travel Planner</h1>
+        <h1>Smart Travel Planner</h1>
     </header>
     <main>
-        <form action="/submit" method="post">
-            <label for="destination">Destination:</label>
-            <input type="text" id="destination" name="destination" required>
-            <br>
-            <label for="departure">Departure Date:</label>
-            <input type="date" id="departure" name="departure" required>
-            <br>
-            <label for="return">Return Date:</label>
-            <input type="date" id="return" name="return" required>
-            <br>
-            <label for="traveler">Number of Travelers:</label>
-            <input type="number" id="traveler" name="traveler" min="1" required>
-            <br>
-            <input type="submit" value="Plan Travel">
-        </form>
+        <h2>Plan Your Trip</h2>
+        <label for="destination">Destination:</label>
+        <input type="text" id="destination" placeholder="Enter your destination">
+
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate">
+
+        <label for="endDate">End Date:</label>
+        <input type="date" id="endDate">
+
+        <label for="budget">Budget:</label>
+        <input type="number" id="budget" placeholder="Enter your budget">
+
+        <button id="planButton">Plan My Trip!</button>
+
+        <div class="result" id="result" style="display:none;"></div>
     </main>
-    <footer>
-        <p>&copy; 2026 Smart Travel Planner</p>
-    </footer>
+    <script>
+        document.getElementById('planButton').addEventListener('click', function() {
+            var destination = document.getElementById('destination').value;
+            var startDate = document.getElementById('startDate').value;
+            var endDate = document.getElementById('endDate').value;
+            var budget = document.getElementById('budget').value;
+
+            if (!destination || !startDate || !endDate || !budget) {
+                alert('Please fill all fields!');
+                return;
+            }
+
+            var resultDiv = document.getElementById('result');
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = `<h3>Your Trip Plan:</h3>\n` +
+                `<p><strong>Destination:</strong> ${destination}</p>\n` +
+                `<p><strong>Travel Dates:</strong> ${startDate} to ${endDate}</p>\n` +
+                `<p><strong>Budget:</strong> $${budget}</p>`;
+        });
+    </script>
 </body>
 </html>
